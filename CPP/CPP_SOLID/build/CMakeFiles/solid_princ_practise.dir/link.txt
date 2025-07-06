@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/solid_princ_practise.dir/solid_princ_practise.cpp.o -o solid_princ_practise 

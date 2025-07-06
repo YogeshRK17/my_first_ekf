@@ -1,0 +1,3 @@
+/home/yogesh/Documents/CPP/CPP_SOLID/build/CMakeFiles/solid_princ_practise.dir
+/home/yogesh/Documents/CPP/CPP_SOLID/build/CMakeFiles/edit_cache.dir
+/home/yogesh/Documents/CPP/CPP_SOLID/build/CMakeFiles/rebuild_cache.dir
