@@ -1,7 +1,11 @@
+#This code generates predicated states and measurements
+
+#Laser data = 10Hz
+#Wheel data = 50Hz
+
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-
 
 class generateData():
     def __init__(self):
@@ -13,10 +17,10 @@ class generateData():
         # self.states[0,] = 1
         # self.states[1,] = 1
         # self.states[2,] = 1
-        self.states[3,] = 2
-        self.states[4,] = 4
-        self.states[5,] = 1.5
-        # self.states[6,] = 1
+        self.states[3,] = 1.5
+        # self.states[4,] = 0
+        # self.states[5,] = 0
+        # self.states[6,] = 0
         # self.states[7,] = 1
         # self.states[8,] = 1
 
@@ -61,7 +65,6 @@ class generateData():
 
         np.savetxt("predicted_states.txt", self.pred_states)
 
-        print("file has been saved successfully...")
 
     def get_measurements(self):
 
@@ -71,15 +74,49 @@ class generateData():
             x     = pred_states[i,1]
             y     = pred_states[i,2]
             theta = pred_states[i,3]
+            omega = pred_states[i,6]
+            ax    = pred_states[i,7]
 
-            x_noise     = x     + 0.1*np.random.randn()
-            y_noise     = y     + 0.1*np.random.randn()
-            theta_noise = theta + 0.1*np.random.randn()
+            if i%5 == 0:
+                sensor_id = 0 #laser
+                x_noise     = x     + 0.02*np.random.randn()
+                y_noise     = y     + 0.02*np.random.randn()
+                theta_noise = theta + 0.02*np.random.randn()
 
-            self.measurements.append(np.append(pred_states[i,0], [x_noise, y_noise, theta_noise]))
+            elif i%3 == 0:
+                sensor_id = 2 #imu
+                omega     = omega + 0.02*np.random.randn()
+                ax        = ax + 0.02*np.random.randn()
+
+            else:
+                sensor_id = 1 #wheel
+                x_noise     = x     + 0.02*np.random.randn()
+                y_noise     = y     + 0.02*np.random.randn()
+                theta_noise = theta + 0.02*np.random.randn()
+
+            self.measurements.append(np.append(pred_states[i,0], [x_noise, y_noise, theta_noise, sensor_id, omega, ax]))
         
         np.savetxt('measurements.txt', self.measurements)
-        
+
+        print("file has been saved successfully...")
+
+    def visualize(self):
+        pred_states = np.loadtxt('/home/yogesh/Documents/Kalman FIlter/predicted_states.txt')
+        measurement = np.loadtxt('/home/yogesh/Documents/Kalman FIlter/measurements.txt')
+        plt.figure(1)
+        plt.plot(pred_states[:,0], pred_states[:,1], label="x_pred", color='g')
+        plt.plot(measurement[:,0], measurement[:,1], label="x_measurement", color='r')
+
+        plt.figure(2)
+        plt.plot(pred_states[:,0], pred_states[:,2], label="y_pred", color='g')
+        plt.plot(measurement[:,0], measurement[:,2], label="y_measurement", color='r')
+
+        plt.figure(3)
+        plt.plot(pred_states[:,0], pred_states[:,3], label="theta_pred", color='g')
+        plt.plot(measurement[:,0], measurement[:,3], label="theta_measurement", color='r')
+        plt.legend()
+        plt.show()
+
 class car():
     def __init__(self):
         self.c1 = np.array([0.5, 0.25])
@@ -127,6 +164,7 @@ def main():
 
     generate_data.get_prediction()
     generate_data.get_measurements()
+    generate_data.visualize()
 
     #For car simulation
     # pred_states = np.array(generate_data.pred_states)
