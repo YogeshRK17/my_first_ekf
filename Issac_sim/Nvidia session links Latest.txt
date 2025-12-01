@@ -1,0 +1,14 @@
+Nvidia session links
+Latest Issac sim version -> 5.0
+
+https://scalloped-book-15e.notion.site/Isaac-Sim-ROS-2-Dev-Meetup-678b26138a254e09915b9a3f83c154bf?source=copy_link
+
+https://share.google/aRU2278HWgDPfPYNs
+
+https://chat.whatsapp.com/EwK5w7WfjEB4MJDXV82M5H?mode=ems_copy_t
+
+https://nvidia-isaac-ros.github.io/reference_workflows/isaac_manipulator/tutorials/tutorial_pick_and_place.html	
+
+https://docs.isaacsim.omniverse.nvidia.com/latest/reference_material/sim_performance_optimization_handbook.html
+
+

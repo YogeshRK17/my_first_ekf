@@ -148,7 +148,7 @@ class filter_laser(sharedResources):
         Mk = np.eye(self.Rk_laser.shape[0])
 
         #get kalman gain
-        #Kk = P@Hk/(Hk@P@Hk.T + Mk@Rk@Mk.T)
+        #Kk = P@Hk.T/(Hk@P@Hk.T + Mk@Rk@Mk.T)
         Kk = self.Pk@(self.Hk_laser.T@(np.linalg.inv(self.Hk_laser@(self.Pk@self.Hk_laser.T) + Mk@(self.Rk_laser@Mk.T))))
 
         #update
@@ -233,7 +233,6 @@ class filter_laser(sharedResources):
 
         self.Hk_imu[0,5] = 1
         self.Hk_imu[1,6] = 1
-        self.Hk_imu
 
         #get the predicted states
         self.states = self.wrapYaw(self.stateTransModel(self.states))
