@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/cpp_prac.dir/cpp_prac.cpp.o -o cpp_prac 
