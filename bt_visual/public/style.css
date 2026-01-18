@@ -1,0 +1,20 @@
+body {
+  font-family: monospace;
+}
+
+.node {
+  fill: white;
+  stroke: black;
+  stroke-width: 1;
+}
+
+.text {
+  font-size: 12px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.line {
+  stroke: black;
+  stroke-width: 1;
+}

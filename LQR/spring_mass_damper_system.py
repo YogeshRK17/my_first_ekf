@@ -2,18 +2,23 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import control
 
+m = 1.0   # mass
+k = 10.0  # spring constant
+b = 1.0   # damping
+
 #System control model
 A = np.array([[0, 1],
-              [0, 0]])
+              [-k/m, -b/m]])
 
 B = np.array([[0],
-              [1]])
+              [1/m]])
+
 
 #Cost function penalty matrix
 Q = np.array([[10, 0],
-              [0, 1]])   # penalize position more
+              [0, 1]])   # penalize position, velocity
 
-R = np.array([[1]])       # penalize control effort
+R = np.array([[1]])
 
 
 #Solving Math
